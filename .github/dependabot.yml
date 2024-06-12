@@ -1,15 +1,16 @@
 ---
 version: 2
+registries:
+    savilleNuget:
+    type: nuget-feed
+    url: https://pkgs.dev.azure.com/savilleassessment/UK/_packaging/OasysCore/nuget/v3/index.json
+    username: geoffrey.rogers@savilleassessment.com
+    password: ${{secrets.MY_AZURE_DEVOPS_TOKEN}}
 updates:
-  - package-ecosystem: "github-actions"
+  - package-ecosystem: "nuget"
     directory: "/"
+    registries: "savilleNuget"
     schedule:
-      interval: "weekly"
-  - package-ecosystem: npm
-    directory: "/javascript"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: bundler
-    directory: "/ruby"
-    schedule:
-      interval: "weekly"
+      interval: "daily"
+      time: "08:00"
+    open-pull-requests-limit: 1
